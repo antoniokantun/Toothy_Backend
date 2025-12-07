@@ -1,0 +1,94 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+
+# dotnet local files
+project.lock.json
+project.assets.json
+.nuget/
+
+# Publish output
+publish/
+*/publish/
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# User secrets / local config
+secrets.json
+appsettings.*.Local.json
+.env
+
+# Database files
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# EF Migrations snapshot (if you don't want to include it)
+# Migrations/**/Snapshot*.cs
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# JetBrains Rider local settings
+.idea/
+
+# VS Code workspace
+*.code-workspace
+
+# Azure Pipelines
+.azure-pipelines.yml
+
+# dotnet tool directories
+.dotnet/
+
+# Generated files
+**/Properties/launchSettings.json
+
+# Ignore generated certificate files
+*.pfx
+
+# User-specific files
+*.suo
+*.user
+*.userprefs
+
+# Temporary files
+*.swp
+*~
+
+# Node/npm (if frontend present)
+node_modules/
+npm-debug.log
+
+# Docs
+*.log
+
+# Ignore built database migrations (optionally)
+# Migrations/**/*
