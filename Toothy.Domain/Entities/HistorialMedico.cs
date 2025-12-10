@@ -1,6 +1,6 @@
 ﻿namespace Toothy.Domain.Entities
 {
-    public class HistorialMedico
+    public class HistorialMedico : BaseEntity
     {
         public int IdHistorialMedico { get; set; }
         public int PacienteId { get; set; }

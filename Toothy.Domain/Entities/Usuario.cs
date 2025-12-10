@@ -6,12 +6,12 @@
         Odontologo = 1,
         Recepcionista = 2
     }
-    public class Usuario
+    public class Usuario : BaseEntity
     {
         public int IdUsuario { get; set; }
         public required string Username { get; set; }
         public required string PasswordHash { get; set; }
-        public DateTime UltimaVezLogueado { get; set; } = DateTime.Now;
+        public DateTime UltimaVezLogueado { get; set; } = DateTime.UtcNow;
         public bool EstaActivo { get; set; } = true;
         public Rol Rol { get; set; }
 
