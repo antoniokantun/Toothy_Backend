@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo '--- Compilando dentro del contenedor .NET ---'
                 sh 'dotnet --version' // Solo para verificar que funciona
-                sh 'dotnet build DentalClinicApp.sln --configuration Release'
+                sh 'dotnet build Toothy.sln --configuration Release'
                 
                 echo '--- Ejecutando Tests dentro del contenedor .NET ---'
                 // Ejecutamos las pruebas
