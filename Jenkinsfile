@@ -30,7 +30,7 @@ pipeline {
                 
                 echo '--- Ejecutando Tests dentro del contenedor .NET ---'
                 // Ejecutamos las pruebas
-                sh 'dotnet test tests/Toothy.UnitTests/Toothy.UnitTests.csproj --no-build --verbosity normal'
+                sh 'dotnet test tests/Toothy.UnitTests/Toothy.UnitTests.csproj --configuration Release --no-build --verbosity normal'
             }
         }
 
