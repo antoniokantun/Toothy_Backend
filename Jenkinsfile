@@ -1,41 +1,44 @@
 pipeline {
-    agent any
+    agent any 
 
     environment {
-        // Nombre de la imagen que crearemos
         IMAGE_NAME = "toothy-api"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Descarga el código del repo
                 checkout scm
             }
         }
 
-        stage('Build .NET') {
+        // --- AQUÍ ESTÁ LA MAGIA ---
+        // Le decimos a Jenkins: "Para estos pasos, usa un contenedor de .NET 10"
+        stage('Compile & Test (.NET)') {
+            agent {
+                docker { 
+                    // Usamos la imagen oficial de Microsoft SDK
+                    image 'mcr.microsoft.com/dotnet/sdk:10.0' 
+                    // Esto asegura que use el mismo espacio de trabajo
+                    reuseNode true 
+                }
+            }
             steps {
-                // Compila la solución completa
-                echo 'Compilando la solución...'
-                sh 'dotnet build DentalClinicApp.sln --configuration Release'
+                echo '--- Compilando dentro del contenedor .NET ---'
+                sh 'dotnet --version' // Solo para verificar que funciona
+                sh 'dotnet build Toothy.sln --configuration Release'
+                
+                echo '--- Ejecutando Tests dentro del contenedor .NET ---'
+                // Ejecutamos las pruebas
+                sh 'dotnet test tests/Toothy.UnitTests/Toothy.UnitTests.csproj --configuration Release --no-build --verbosity normal'
             }
         }
 
-        stage('Unit Tests') {
+        // Esta etapa vuelve a usar el agente "any" (Tu Jenkins con Docker socket)
+        stage('Build Docker Image') {
             steps {
-                // Ejecuta las pruebas. Si fallan, el pipeline se detiene.
-                echo 'Ejecutando pruebas unitarias...'
-                // Ajusta la ruta si tu carpeta de tests tiene otro nombre
-                sh 'dotnet test tests/Toothy.UnitTests/Toothy.UnitTests.csproj --no-build --verbosity normal'
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                echo 'Creando imagen Docker...'
-                // Construye la imagen usando el Dockerfile de la raíz
-                // Nota: El punto '.' al final es vital (es el contexto)
+                echo '--- Creando la imagen final de Docker ---'
+                // Nota: Aquí se usa el Dockerfile para empaquetar
                 sh "docker build -t ${IMAGE_NAME}:latest -f Dockerfile ."
             }
         }
@@ -45,11 +48,11 @@ pipeline {
         always {
             echo 'Pipeline finalizado.'
         }
-        success {
-            echo '¡Éxito! El código pasó todas las pruebas y se creó la imagen.'
-        }
         failure {
-            echo 'Ups, algo falló. Revisa los logs.'
+            echo '❌ Error en el Pipeline.'
+        }
+        success {
+            echo '✅ ¡Éxito! Todo funciona.'
         }
     }
 }
