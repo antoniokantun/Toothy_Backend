@@ -61,7 +61,7 @@ namespace Toothy.Infrastructure.Context
                 entity.HasKey(t => t.IdTratamiento);
 
                 entity.Property(t => t.Nombre).HasMaxLength(100);
-                entity.Property(t => t.Descripcion).HasMaxLength(500); // Límite razonable
+                entity.Property(t => t.Descripcion).HasMaxLength(500);
 
                 entity.Property(t => t.CostoBase)
                     .HasColumnType("decimal(18,2)");

@@ -27,7 +27,7 @@ namespace Toothy.Application.Services.Implementations
                 CorreoElectronico = dto.CorreoElectronico,
                 Telefono = dto.Telefono,
                 Notas = dto.Notas,
-                FechaSolicitud = DateTime.Now,
+                FechaSolicitud = DateTime.UtcNow,
                 Estado = EstadoLead.Nuevo
             };
 

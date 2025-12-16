@@ -1,46 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Toothy.Application.DTOs.Leads;
+using Toothy.Application.DTOs.Tratamientos;
+using Toothy.Application.Services.Implementations;
 using Toothy.Application.Services.Interfaces;
 
 namespace Toothy.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LeadsController : ControllerBase
+    public class TratamientosController : ControllerBase
     {
-        private readonly ILeadService _leadService;
-
-        public LeadsController(ILeadService leadService)
+        private readonly ITratamientoService _tratamientoService;
+        public TratamientosController(TratamientoService tratamientoService)
         {
-            _leadService = leadService;
+            _tratamientoService = tratamientoService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ObtenerTodosLead()
+        public async Task<IActionResult> ObtenerTodosTratamientoAsync()
         {
             try
             {
-                var leads = await _leadService.ObtenerTodosLeadAsync();
-                return Ok(leads);
+                var tratamientos = await _tratamientoService.ObtenerTodosTratamientoAsync();
+                return Ok(tratamientos);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
-
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarLead([FromBody] CreateLeadDto dto)
+        public async Task<IActionResult> CrearTratamientoAsync([FromBody] CreateTratamientoDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
             try
             {
-                var resultado = await _leadService.RegistrarLeadAsync(dto);
+                var resultado = await _tratamientoService.CrearTratamientoAsync(dto);
                 return Ok(resultado);
             }
             catch (Exception ex)

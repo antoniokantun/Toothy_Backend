@@ -36,7 +36,7 @@ pipeline {
                 echo 'Creando imagen Docker...'
                 // Construye la imagen usando el Dockerfile de la raíz
                 // Nota: El punto '.' al final es vital (es el contexto)
-                sh "docker build -t ${IMAGE_NAME}:latest -f Toothy.API/Dockerfile ."
+                sh "docker build -t ${IMAGE_NAME}:latest -f Dockerfile ."
             }
         }
     }
