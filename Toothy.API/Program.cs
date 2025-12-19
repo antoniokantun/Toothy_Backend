@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ToothyDbContext>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ILeadService, LeadService>();
 builder.Services.AddScoped<ITratamientoService, TratamientoService>();
+builder.Services.AddScoped<IOdontologoService, OdontologoService>();
 
 
 builder.Services.AddCors(options =>

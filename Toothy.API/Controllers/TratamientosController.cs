@@ -10,27 +10,20 @@ namespace Toothy.API.Controllers
     public class TratamientosController : ControllerBase
     {
         private readonly ITratamientoService _tratamientoService;
-        public TratamientosController(TratamientoService tratamientoService)
+        public TratamientosController(ITratamientoService tratamientoService)
         {
             _tratamientoService = tratamientoService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ObtenerTodosTratamientoAsync()
+        public async Task<IActionResult> ObtenerTodosTratamiento()
         {
-            try
-            {
-                var tratamientos = await _tratamientoService.ObtenerTodosTratamientoAsync();
-                return Ok(tratamientos);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
-            }
+            var tratamientos = await _tratamientoService.ObtenerTodosTratamientoAsync();
+            return Ok(tratamientos);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearTratamientoAsync([FromBody] CreateTratamientoDto dto)
+        public async Task<IActionResult> CrearTratamiento([FromBody] CreateTratamientoDto dto)
         {
             if (!ModelState.IsValid)
             {

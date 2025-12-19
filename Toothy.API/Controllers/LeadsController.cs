@@ -18,16 +18,8 @@ namespace Toothy.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerTodosLead()
         {
-            try
-            {
-                var leads = await _leadService.ObtenerTodosLeadAsync();
-                return Ok(leads);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
-            }
-
+            var leads = await _leadService.ObtenerTodosLeadAsync();
+            return Ok(leads);
         }
 
         [HttpPost]
