@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Toothy.Application.Services.Implementations;
 using Toothy.Application.Services.Interfaces;
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Toothy.Application.DTOs.Leads.CreateLeadDto>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ToothyDbContext>(options =>
@@ -18,6 +22,9 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<ILeadService, LeadService>();
 builder.Services.AddScoped<ITratamientoService, TratamientoService>();
 builder.Services.AddScoped<IOdontologoService, OdontologoService>();
+builder.Services.AddScoped<ICitaService, CitaService>();
+builder.Services.AddScoped<IPacienteService, PacienteService>();
+builder.Services.AddScoped<IRecepcionistaService, RecepcionistaService>();
 
 
 builder.Services.AddCors(options =>

@@ -18,8 +18,8 @@ namespace Toothy.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerTodosOdontologo()
         {
-            var odontologo = await _odontologoService.ObtenerTodosOdontologoAsync();
-            return Ok(odontologo);
+            var odontologos = await _odontologoService.ObtenerTodosOdontologoAsync();
+            return Ok(odontologos);
         }
 
         [HttpGet("{id}")]
