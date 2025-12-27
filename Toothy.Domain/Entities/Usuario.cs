@@ -14,6 +14,8 @@
         public DateTime UltimaVezLogueado { get; set; } = DateTime.UtcNow;
         public bool EstaActivo { get; set; } = true;
         public Rol Rol { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
 
     }
 }

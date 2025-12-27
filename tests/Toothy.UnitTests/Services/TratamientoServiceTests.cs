@@ -16,7 +16,6 @@ public class TratamientoServiceTests
     public TratamientoServiceTests()
     {
         _mockRepository = new Mock<IGenericRepository<Tratamiento>>();
-
         _service = new TratamientoService(_mockRepository.Object);
     }
 
